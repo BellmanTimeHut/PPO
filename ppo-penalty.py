@@ -7,9 +7,14 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 env = gym.make("CartPole-v1")
 
 # These coefficients are experimentally determined in practice.
-gamma = 0.99     # discount
-kl_coeff = 0.20  # weight coefficient for KL-divergence loss
-vf_coeff = 0.50  # weight coefficient for value loss
+# discount
+gamma = 0.99     
+
+# weight coefficient for KL-divergence loss
+# if kl_coeff = 0.00, then ppo-penalty is reduced to be CPI
+kl_coeff = 0.20 
+# weight coefficient for value loss
+vf_coeff = 0.50  
 
 class ActorNet(nn.Module):
     def __init__(self, hidden_dim=16):
